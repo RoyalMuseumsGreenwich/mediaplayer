@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document>
+
+	<xmlType>Attractor</xmlType>
+
+	<attractorHeadline>Media Player</attractorHeadline>
+	<attractorBodyText>Some unbelievably fascinating info regarding the media player's exciting content lorem ipsum blah blah blah.</attractorBodyText>
+
+	<attractorVidPath>media/attractor2.webm</attractorVidPath>
+
+</document>

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document>
+
+	<xmlType>Content</xmlType>
+
+	<settings>
+		<inactivityTimerMax>60</inactivityTimerMax>
+		<stillThereTimeMax>10</stillThereTimeMax>
+		<!-- if portraitMode is not 'true', content is displayed landscape -->
+		<portraitMode>false</portraitMode>
+		<layoutVariant>2</layoutVariant>
+	</settings>
+
+	<defaultFolders>
+		<video>media</video>
+		<bsl>media</bsl>
+		<subtitles>media</subtitles>
+		<thumbnailImages>media</thumbnailImages>
+	</defaultFolders>
+
+
+	<clips>
+
+		<clip>
+			<title>A media player clip</title>
+			<description>A short and snappy description of the first media player clip.</description>
+			<attribution>Copyright attribution notice for the clip</attribution>
+			<video>
+				<file>vid1.mp4</file>
+			</video>
+<!-- 			<bsl>
+				<file>bsl.webm</file>
+			</bsl>
+			<subtitles>
+				<file>subs1.vtt</file>
+			</subtitles> -->
+			<thumbnailImage>
+				<file>HMSVictory.jpg</file>
+			</thumbnailImage>
+		</clip>
+
+		<clip>
+			<title>The second media player clip</title>
+			<description>An excessively and probably needlessly wordy and longwinded description of the second media player clip written by someone with verbal diahorrea who gives insufficient attention to the discipline of interpretative editing.</description>
+			<attribution>Copyright attribution notice for the clip</attribution>
+			<video>
+				<file>vid2.mp4</file>
+				<folder>media2</folder>
+			</video>
+			<bsl>
+				<file>bsl.webm</file>
+				<folder>media2</folder>
+			</bsl>
+			<subtitles>
+				<file>subs2.vtt</file>
+				<folder>media2</folder>
+			</subtitles>
+			<thumbnailImage>
+				<file>carrier.jpg</file>
+				<folder>media</folder>
+			</thumbnailImage>
+		</clip>
+  
+		<clip>
+			<title>Another clip</title>
+			<description>A short and snappy description of the clip.</description>
+			<attribution>Copyright attribution notice for the clip</attribution>
+			<video>
+				<file>vid1.mp4</file>
+			</video>
+			<bsl>
+				<file>bsl.webm</file>
+			</bsl>
+			<subtitles>
+				<file>subs1.vtt</file>
+			</subtitles>
+			<thumbnailImage>
+				<file>implacable.jpg</file>
+			</thumbnailImage>
+		</clip>
+
+		<clip>
+			<title>Yet another clip</title>
+			<description>A short and snappy description of the clip.</description>
+			<attribution>Copyright attribution notice for the clip</attribution>
+			<video>
+				<file>vid1.mp4</file>
+			</video>
+			<bsl>
+				<file>bsl.webm</file>
+			</bsl>
+			<subtitles>
+				<file>subs1.vtt</file>
+			</subtitles>
+			<thumbnailImage>
+				<file>carrier.jpg</file>
+			</thumbnailImage>
+		</clip>
+
+	</clips>
+
+</document>

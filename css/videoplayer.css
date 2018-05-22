@@ -1,0 +1,330 @@
+body{
+	width:100vw;
+	height:100vh;
+	padding:0;
+	margin:0;
+	overflow: hidden;
+	font-family: CeraProRegular;
+}
+
+#videoPlayerDiv{ 
+  width: 100%;
+  height: 100%;
+  background: #000;
+	position: relative;
+}
+
+#videoMain{ 
+	width:100%;
+	height:100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 0;
+}
+
+#videoBsl{ 
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	z-index: 1;
+	transition: opacity 0.5s ease-in-out;
+}
+.hidden {
+	opacity: 0;
+}
+
+#vidControls { 
+  padding: 0px 1%;
+  color: #CCC;
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  width: 100%;
+  box-sizing: border-box;
+	height:180px;
+	z-index: 2;
+	transform: translateY(0px);
+	transition: all 0.5s ease;
+}
+
+.hiddenControls {
+	transform: translateY(180px) !important;
+	transition: all 1s ease !important; 
+}
+.hiddenMenuBtn {
+	transform: translateY(-270px);
+	transition: all 1s ease !important; 
+}
+
+.captions-no-controls {
+	transform: translateY(120px) !important;
+	transition: all 1s ease !important; 
+}
+
+#background-shadow {
+	width:100%;
+	height:180px;
+	position: absolute;
+	left:0;
+	bottom:0;
+	background: linear-gradient(to bottom, rgba(0,0,0,0) 0%,rgba(0,0,0,1) 100%);
+	opacity: 1;
+	transition: all 0.5s ease;
+}
+
+.hide-shadow {
+	opacity:0 !important;
+	transition: all 1.5s ease;
+}
+
+
+input#volumeslider{ width: 80px;}
+
+
+
+#slider_track-height {
+	margin: auto;
+  outline: none;
+  padding: 0;
+  width: 100%;
+  height: 6px;
+  background-color: #feebc5;
+  border-radius: 10px;
+  cursor: pointer;
+  -webkit-appearance: none;
+	position:relative;
+}
+
+#ui-slider-range {
+	height:100%;
+	position:absolute;
+	top:0;
+	left:0;
+	background-color: red;
+}
+
+#ui-slider-handle {
+	width:20px;
+	height:20px;
+	border-radius:50%;
+	background-color:white;
+	position:absolute;
+	top:-8px;
+}
+
+#seekSlider {
+  margin: auto;
+  outline: none;
+  padding: 0;
+	width: 98%;
+  border: none;
+  height: 8px;
+  background-color: rgba(255,255,255,0.5);
+  background-image: linear-gradient(#ffffff, #ffffff);
+  background-size: 50% 100%;
+  background-repeat: no-repeat;
+  border-radius: 10px;
+  cursor: pointer;
+  -webkit-appearance: none;
+	position: absolute;
+	bottom:105px;
+	left:1%;
+}
+
+#seekSlider::-webkit-slider-runnable-track {
+  box-shadow: none;
+  border: none;
+  background: transparent;
+  -webkit-appearance: none;
+}
+
+#seekSlider::-webkit-slider-thumb {
+  width: 20px;
+  height: 20px;
+  border: 0;
+  background: #fff;
+  border-radius: 100%;
+  box-shadow: 0 0 5px 2px rgba(0,0,0,0.1);
+  -webkit-appearance: none;
+}
+#buttonWrapper {
+	height:100px;
+	width:100%;
+	position: absolute;
+	bottom:0px;
+	left:0px;
+	padding: 0% 1%;
+	box-sizing: border-box;
+}
+
+#videoPlayerScreen button {
+	width:100px;
+	height:100px;
+	float:left;
+	outline: none;
+	border:none;
+  background-color: transparent;
+}
+
+#playpausebtn:active, #restartBtn:active, #menuBtn:active {
+	transform: scale(0.9);
+	opacity: 0.7;
+}
+
+.toggleBtn:active {
+	transform: scale(0.95);
+	opacity: 0.9;
+}
+
+#menuBtnDiv {
+	position: absolute;
+	top: -20px;
+	left: -20px;
+	width: 250px;
+	height: 250px;
+	z-index: 5;
+	transition: all 0.5s ease;
+}
+#menuBtnBg {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	background: radial-gradient(circle at 0% 0%, rgba(0,0,0,0.6) 0%, transparent 60%);
+	filter: blur(10px);
+}
+#menuBtn {
+	position: absolute;
+	background-image: url("../img/back-button.svg");
+	top: 30px;
+	left: 38px;
+	width:100px;
+	height:100px;
+	filter: none;
+}
+
+#durationWrapper, #titleWrapper {
+	display: flex;
+	align-items: center;
+  height: 100px;
+  float: left;
+  box-sizing: border-box;
+  padding: 35px 30px;
+	font-size:21px;
+	position:relative;
+}
+
+#durationWrapper {
+	width:200px;
+}
+
+
+#curTimeText, #movieTitle {
+	font-family: CeraProMedium;
+	color: white;
+}
+#curTimeText {
+	width: 58px;
+}
+
+#durTimeText {
+	padding-left: 3px;
+	font-family: CeraProLight;
+}
+#movieTitle {
+	padding-left: 18px;
+}
+#movieTitle:before {
+	content:"|";
+	position:absolute;
+	left:0;
+	font-family: CeraProLight;
+}
+
+
+#buttonWrapper button.toggleBtn {
+	float:right;
+ }
+
+.toggleBtn span {
+	width: 90%;
+	height:55%;
+	border: solid 1px #fff;
+	text-align: center;
+	color:white;
+	margin:22% 5%;
+	display: inline-block;
+  vertical-align: middle;
+	border-radius: 6px;
+  line-height: 260%;
+	font-family: CeraProBold;
+	font-size:21px;
+	transition: all 0.5s ease-in-out;
+}
+
+button.active span{
+	background-color:white;
+	color:#000;
+}
+
+.pause {
+	background-image: url("../img/pause.svg");
+}
+
+.play {
+	background-image: url("../img/play.svg");
+}
+
+#restartBtn {
+	background-image: url("../img/reload.svg");
+}
+
+#captionDisplay {
+	font-family: CeraProBold;
+	white-space: pre;
+	text-align: center;
+	transition: opacity 0.5s ease-in-out;
+	position: absolute;
+	padding: 25px;
+	line-height: 1.5;
+	display: block;
+	left:50%;
+	bottom:200px;
+	z-index: 2;
+	font-size: 28px;
+	transform: translateX(-50%);
+	text-shadow: 
+		1px 1px #000,
+		-1px 1px #000,
+		1px -1px #000,
+		-1px -1px #000;
+}
+
+video::cue { 
+	font-size: 28px;
+	font-family: CeraProBold;
+	background:transparent;
+	position: absolute;
+	bottom:200px;
+	left:0;
+	text-shadow: 
+		1px 1px #000,
+		-1px 1px #000,
+		1px -1px #000,
+		-1px -1px #000;
+}
+
+video::-webkit-media-text-track-container {
+}
+
+
+
+.bsl-active {
+	display:block !important;
+}
+
+.hide {
+	display:block !important;
+}
+
+

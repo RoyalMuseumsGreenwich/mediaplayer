@@ -3,13 +3,9 @@
 	cursor: none;
 }
 */
+
 /*	attractScreen */
-#attractScreen {
-	position: absolute;
-	z-index: 100;
-	width: 100%;
-	height: 100%;
-} #attractScreen .textBackdropDiv {
+#attractScreen .textBackdropDiv {
 	width: 50%;
 	height: 100%;
 	background: rgba(41,48,59,0.5);
@@ -96,6 +92,7 @@
 	width: 100%;
 }
 
+/*	Animations */
 .aboveBar {
 	align-items: flex-end;
 	padding-bottom: 30px;

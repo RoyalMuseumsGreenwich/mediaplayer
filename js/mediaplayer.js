@@ -33,6 +33,7 @@ $(function() {
 	//	Timers & handlers
 	var stillThereTimeMax, stillThereTime, inactivityTimerMax;
 	var stillThereHandler, inactivityHandler, backToMenuHandler;
+  var idleInterval = setInterval(timerIncrement, 1000); 					// 1 second
 
 	var portraitMode;
 
@@ -496,8 +497,6 @@ $(function() {
 		$seekSlider.get(0).value = nt;
 		var pb = nt / 10;
 
-		$seekSlider.trigger('input');
-		
 		var curmins = Math.floor(videoMain.currentTime / 60);
 		var cursecs = Math.floor(videoMain.currentTime - curmins * 60);
 		var durmins = Math.floor(videoMain.duration / 60);
@@ -532,43 +531,23 @@ $(function() {
   });
 
 
-	//	Idle timer - hides video playback controls
-	$(document).ready(function () {
-    //Increment the idle time counter every seconds.
-    var idleInterval = setInterval(timerIncrement, 1000); // 1 second
-
-    //Zero the idle timer on mouse movement.
-    $(this).mousemove(function (e) {
-      idleTime = 0;
-    });
-    $(this).keypress(function (e) {
-      idleTime = 0;
-			$("#video_controls_bar").removeClass("hide-controls");
-  	});
-	});
+  //	Idle timer
+  $(document).click(function (e) {
+    idleTime = 0;
+		$("#vidControls").removeClass("hiddenControls");
+		$('#menuBtnDiv').removeClass('hiddenMenuBtn');
+		$("#display").removeClass("captionsNoControls");
+		$("#backgroundShadow").removeClass("hiddenShadow");
+  });
 
 	function timerIncrement() {
-    idleTime = idleTime + 1;
-
-    $(this).keypress(function (e) {
-			$("#vidControls").removeClass("hiddenControls");
-			$('#menuBtnDiv').removeClass('hiddenMenuBtn');
-			$("#display").removeClass("captions-no-controls");
-			$("#background-shadow").removeClass("hide-shadow");
-	  });
-    $(this).mousemove(function (e) {
-      $("#vidControls").removeClass("hiddenControls");
-			$('#menuBtnDiv').removeClass('hiddenMenuBtn');
-			$("#display").removeClass("captions-no-controls");
-			$("#background-shadow").removeClass("hide-shadow");
-    });
-
+    idleTime++;
     if (idleTime > 4) { // 5 seconds
 			if (playing){
     		$("#vidControls").addClass("hiddenControls");
 				$('#menuBtnDiv').addClass('hiddenMenuBtn');
-				$("#display").addClass("captions-no-controls");
-				$("#background-shadow").addClass("hide-shadow");
+				$("#display").addClass("captionsNoControls");
+				$("#backgroundShadow").addClass("hiddenShadow");
 			}
     }
 	}

@@ -1,0 +1,279 @@
+$screen_width: 1920px;
+$screen_height: 1080px;
+
+
+/*	Global	*/
+body {
+	padding: 0;
+	margin: 0;
+	color: white;
+	font-family: CeraProRegular;
+}
+h1, h2, h3, h4 {
+	font-weight: normal;
+	margin: 0;
+}
+#container {
+	position: relative;
+	width: $screen_width;
+	height: $screen_height;
+	overflow: hidden;
+}
+.screen {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+
+
+/*	Screen layering */
+#attractScreen {
+	z-index: 4;
+}
+#stillThereScreen {
+	z-index: 3;
+}
+#menuScreen {
+	z-index: 2;
+} 
+#videoPlayerScreen {
+	z-index: 1;
+}
+
+
+/*	Still There screen */
+#stillThereScreen {
+	background: rgba(0,0,0,0.7);
+	width: 100%;
+	height: 100%;
+	text-align: center;
+} #stillThereScreen h1 {
+	margin-top: 380px;
+	font-family: CeraProMedium;
+	font-size: 81px;
+} #stillThereScreen h3 {
+	margin-top: 30px;
+	margin-left: 635px;
+	text-align: left;
+	font-family: CeraProLight;
+	font-size: 30px;
+} #stillThereBtn {
+	border: none;
+	margin-top: 70px;
+	padding: 20px 50px;
+	border-radius: 8px;
+	background: white;
+	font-size: 24px;
+	color: black;
+	font-family: CeraProRegular;
+}
+
+
+/*	Menu screen */
+#menuScreen video {
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: -2;
+} 
+.menuOverlay {
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: -1;
+	width: 100%;
+	height: 100%;
+	background: rgba(0,0,0,0.7);
+} 
+#thumbnailDiv {
+	position: absolute;
+	box-sizing: border-box;
+	left: 0;
+	display: flex;
+	flex-wrap: nowrap;
+	justify-content: flex-start;
+	align-items: center;
+	height: 100%;
+	width: 100%;
+	padding-left: 200px;
+	overflow: scroll;
+	overflow-y: hidden;
+} 
+#thumbnailDiv::-webkit-scrollbar {
+	display:none;
+}
+.thumbnail {
+	width: 440px;
+	height: 685px;
+	background: white;
+	color: black;
+	border-radius: 8px;
+	box-shadow: 5px 5px 10px rgba(0,0,0,0.6), 5px 10px 30px rgba(0,0,0,0.3); 
+	display: inline-block;
+	flex-shrink: 0;
+	flex-grow: 0;
+	margin-right: 100px;
+} .thumbnail.animated {
+	transition: all 1.5s cubic-bezier(0.215, 0.61, 0.355, 1);	/* easeOutCubic */
+} .thumbnail.selected {
+	transform: translateY(-5px);
+} .thumbnail.unSelected {
+	transform: translateY(5px);
+	filter: brightness(50%);
+}
+.thumbImg {
+	z-index: 1;
+	height: 55%;
+	width: 100%;
+	position: relative;
+	border-radius: 8px 8px 0 0;
+	background-image: url('../media/implacable.jpg');
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center;
+} 
+.thumbImg:after {
+	position: absolute;
+	z-index: 2;
+	content: '';
+	bottom: 0;
+	left: 0;
+	height: 70px;
+	width: 100%;
+	background: linear-gradient(to top, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0) 100%);
+}
+.thumbDuration {
+	position: absolute;
+	z-index: 3;
+	bottom: 10px;
+	left: 30px;
+	text-transform: uppercase;
+	color: white;
+} 
+.thumbInfo {
+	position: relative;
+	padding: 30px;
+	box-sizing: border-box;
+	height: 45%;
+	color: black;
+} .thumbInfo h2 {
+	font-family: CeraProMedium;
+	font-size: 36px;
+	margin-bottom: 20px;
+	line-height: 1.2;
+} .thumbInfo h4 {
+	font-size: 22px; 
+	line-height: 1.5;
+}
+.thumbAttribution {
+	position: absolute;
+	box-sizing: border-box;
+	padding: 20px 30px;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	border-top: 1px solid #DDD;
+	color: #BBB;
+}
+
+.thumbPadDiv {
+	font-size: 0;
+	width: 100px;
+	height: 100%;
+	flex-shrink: 0;
+	display: inline-block;
+}
+
+.playBtnDiv {
+	position: absolute;
+	width: 150px;
+	height: 150px;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%) rotate(90deg);
+} .playBtnIconDiv {
+	width: 100%;
+	height: 100%;
+	position: relative;
+} .playBtnRing {
+	position: absolute;
+	width: 120px;
+	height: 120px;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	border: 7px solid white;
+	border-radius: 100px;
+	background: rgba(0,0,0,0.4);
+} .playBtnTriangle, .playBtnTriangle:before, .playBtnTriangle:after { 
+	width: 4em; height: 4em; 
+} .playBtnTriangle {
+	overflow: hidden;
+	position: absolute;
+	top: -82px;
+	left: 42px;
+	margin: 7em auto 0;
+	border-radius: 20%;
+	transform: translateY(50%) rotate(30deg) skewY(30deg) scaleX(.866);
+} .playBtnTriangle:before, .playBtnTriangle:after {
+	position: absolute;
+	background: white;
+	pointer-events: auto;
+	content: '';
+}
+.playBtnTriangle:before {
+	border-radius: 20% 20% 20% 53%;
+	transform: scaleX(1.155) skewY(-30deg) rotate(-30deg) translateY(-42.3%) 
+			skewX(30deg) scaleY(.866) translateX(-24%);
+}
+.playBtnTriangle:after {
+	border-radius: 20% 20% 53% 20%;
+	transform: scaleX(1.155) skewY(-30deg) rotate(-30deg) translateY(-42.3%) 
+			skewX(-30deg) scaleY(.866) translateX(24%);
+}
+
+.pulse {
+	animation-duration: 2s;
+}
+
+.obscurer {
+	position: absolute;
+	z-index: 2;
+	filter: blur(10px);
+} #obscurerLeft {
+	top: -20px;
+	left: -20px;
+	height: 120%;
+	width: 200px;
+	background: linear-gradient(to right, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 10%, rgba(0,0,0,0.5) 70%, rgba(0,0,0,0) 100%);
+} #obscurerRight {
+	top: -20px;
+	right: -20px;
+	height: 120%;
+	width: 200px;
+	background: linear-gradient(to left, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 10%, rgba(0,0,0,0.5) 70%, rgba(0,0,0,0) 100%);
+}
+
+/*	Adaptive styling for different setups */
+.twoThumb .thumbnail {
+	margin-right: 150px;
+} #thumbnailDiv.twoThumb {
+	padding-left: 445px;
+}
+#container.portrait {
+	height: 1920px;
+	width: 1080px;
+} .portrait #attractScreen .textBackdropDiv {
+	width: 100%;
+	height: 50%;
+}
+
+
+
+
+
+
+
+

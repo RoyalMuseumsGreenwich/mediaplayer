@@ -58,7 +58,7 @@ h1, h2, h3, h4 {
 	margin-left: 635px;
 	text-align: left;
 	font-family: CeraProLight;
-	font-size: 30px;
+	font-size: 26px;
 } #stillThereBtn {
 	border: none;
 	margin-top: 70px;
@@ -68,6 +68,7 @@ h1, h2, h3, h4 {
 	font-size: 24px;
 	color: black;
 	font-family: CeraProRegular;
+	outline: none;
 }
 
 
@@ -97,7 +98,7 @@ h1, h2, h3, h4 {
 	align-items: center;
 	height: 100%;
 	width: 100%;
-	padding-left: 200px;
+	padding-left: 250px;
 	overflow: scroll;
 	overflow-y: hidden;
 } 
@@ -105,16 +106,16 @@ h1, h2, h3, h4 {
 	display:none;
 }
 .thumbnail {
-	width: 440px;
-	height: 685px;
+	width: 420px;
+	height: 640px;
 	background: white;
 	color: black;
-	border-radius: 8px;
+	border-radius: 10px;
 	box-shadow: 5px 5px 10px rgba(0,0,0,0.6), 5px 10px 30px rgba(0,0,0,0.3); 
 	display: inline-block;
 	flex-shrink: 0;
 	flex-grow: 0;
-	margin-right: 100px;
+	margin-right: 80px;
 } .thumbnail.animated {
 	transition: all 1.5s cubic-bezier(0.215, 0.61, 0.355, 1);	/* easeOutCubic */
 } .thumbnail.selected {
@@ -147,6 +148,8 @@ h1, h2, h3, h4 {
 .thumbDuration {
 	position: absolute;
 	z-index: 3;
+	font-size: 12px;
+	letter-spacing: 1px;
 	bottom: 10px;
 	left: 30px;
 	text-transform: uppercase;
@@ -164,8 +167,8 @@ h1, h2, h3, h4 {
 	margin-bottom: 20px;
 	line-height: 1.2;
 } .thumbInfo h4 {
-	font-size: 22px; 
-	line-height: 1.5;
+	font-size: 20px; 
+	line-height: 1.4;
 }
 .thumbAttribution {
 	position: absolute;
@@ -242,6 +245,7 @@ h1, h2, h3, h4 {
 	position: absolute;
 	z-index: 2;
 	filter: blur(10px);
+	pointer-events: none;
 } #obscurerLeft {
 	top: -20px;
 	left: -20px;
@@ -271,7 +275,9 @@ h1, h2, h3, h4 {
 }
 
 
-
+#seekSlider {
+	width: 50%;
+}
 
 
 

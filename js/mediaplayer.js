@@ -429,6 +429,7 @@ $(function() {
 	function playVids() {
 		console.log("Playing vids");
 		seekTimeUpdate();
+		$seekSlider.trigger('input');
 		playing = true;
 		videoMain.play();
 		videoBsl.play();
@@ -489,7 +490,6 @@ $(function() {
 	}
 
 	function seekTimeUpdate() {
-		$seekSlider.trigger('input');
 		if(!$attractScreen.is(':visible')) {
 			restartInactivityTimer();
 		}
@@ -507,6 +507,7 @@ $(function() {
 		if(durmins < 10){ durmins = "0"+durmins; }
 		$curTimeText.text(curmins+":"+cursecs);
 		$durTimeText.text(durmins+":"+dursecs);
+		$seekSlider.trigger('input');
 	}
 
 	$seekSlider.on('input', function(e){
@@ -514,7 +515,7 @@ $(function() {
 	      max = e.target.max,
 	      val = e.target.value;
 	  $seekSlider.css({
-	    'backgroundSize': (val - min) * 100 / (max - min) + '% 100%'
+	    'backgroundSize': ((val - min) * 100 / (max - min)) + '% 100%'
 	  });
 	});
 

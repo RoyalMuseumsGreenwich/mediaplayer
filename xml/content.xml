@@ -41,7 +41,7 @@
 
 		<clip>
 			<title>The second media player clip</title>
-			<description>An excessively and probably needlessly wordy and longwinded description of the second media player clip written by someone with verbal diahorrea who gives insufficient attention to the discipline of interpretative editing.</description>
+			<description>An excessively and needlessly wordy and longwinded description of the second media player clip written by someone with verbal diahorrea who should really have stopped typing words some time ago.</description>
 			<attribution>Copyright attribution notice for the clip</attribution>
 			<video>
 				<file>vid2.mp4</file>
@@ -76,6 +76,42 @@
 			</subtitles>
 			<thumbnailImage>
 				<file>implacable.jpg</file>
+			</thumbnailImage>
+		</clip>
+
+		<clip>
+			<title>Yet another clip</title>
+			<description>A short and snappy description of the clip.</description>
+			<attribution>Copyright attribution notice for the clip</attribution>
+			<video>
+				<file>vid1.mp4</file>
+			</video>
+			<bsl>
+				<file>bsl.webm</file>
+			</bsl>
+			<subtitles>
+				<file>subs1.vtt</file>
+			</subtitles>
+			<thumbnailImage>
+				<file>carrier.jpg</file>
+			</thumbnailImage>
+		</clip>
+
+		<clip>
+			<title>Yet another clip</title>
+			<description>A short and snappy description of the clip.</description>
+			<attribution>Copyright attribution notice for the clip</attribution>
+			<video>
+				<file>vid1.mp4</file>
+			</video>
+			<bsl>
+				<file>bsl.webm</file>
+			</bsl>
+			<subtitles>
+				<file>subs1.vtt</file>
+			</subtitles>
+			<thumbnailImage>
+				<file>carrier.jpg</file>
 			</thumbnailImage>
 		</clip>
 

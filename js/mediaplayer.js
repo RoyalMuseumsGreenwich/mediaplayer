@@ -34,6 +34,7 @@ $(function() {
 	var stillThereTimeMax, stillThereTime, inactivityTimerMax;
 	var stillThereHandler, inactivityHandler, backToMenuHandler;
   var idleInterval = setInterval(timerIncrement, 1000); 					// 1 second
+  var seekSliderHandler;
 
 	var portraitMode;
 
@@ -179,6 +180,8 @@ $(function() {
 	function configureDisplay() {
 		if(portraitMode) {
 			$container.addClass('portrait');
+		} else {
+			$container.addClass('landscape');
 		}
 		if($('.thumbnail').length === 2) {
 			$('#thumbnailDiv').addClass('twoThumb');
@@ -238,19 +241,20 @@ $(function() {
 		$videoMain.get(0).load();
 		$('#movieTitle').text(clipArray[index].title);
 		if(clipArray[index].bslPath) {
-			$('#videoBsl source').attr('src', clipArray[index].bslPath);
-			$videoBsl.get(0).load();
+			$videoBsl.get(0).src = clipArray[index].bslPath;
 			$bslBtn.show();			
 		} else {
+			$videoBsl.get(0).src = '';
 			$bslBtn.hide();			
 		}
 		if(clipArray[index].subtitlePath) {
 			$('#videoMain track').attr('src', clipArray[index].subtitlePath);
 			$captionBtn.show();
 		} else {
-			$('#videoMain track').attr('src', 'none');				//	Need to do better than this!
+			$('#videoMain track').removeAttr('src');				//	Need to do better than this!
 			$captionBtn.hide();
 		}
+		$videoBsl.get(0).load();
 	}
 
 	function rewindClip() {
@@ -284,7 +288,6 @@ $(function() {
 	}
 
 	function restartInactivityTimer() {
-		console.log("Restarting Inactivity timer...");
 		// console.log(restartInactivityTimer.caller);
 		clearInactivityTimer();
 		startInactivityTimer();
@@ -322,6 +325,8 @@ $(function() {
 			if(clipArray.length > 1) {
 				$('#thumbnailDiv').get(0).scrollTo(0,0);
 				$menuScreen.show();
+			} else {
+				rewindClip();
 			}
 			if(callback && typeof(callback) === 'function') {
 				callback();
@@ -378,7 +383,6 @@ $(function() {
 		restartInactivityTimer();
 	});
 	$videoPlayerScreen.on('touchstart', function() {
-		console.log("touch!");
 		restartInactivityTimer();
 	});
 
@@ -411,11 +415,6 @@ $(function() {
 		backToMenu();
 	});
 
-	$seekSlider.on('change', vidSeek);
-
-	$videoMain.on('timeupdate',seekTimeUpdate);
-
-
 	//	Video controls
 	function playPause() {
 		restartInactivityTimer();
@@ -427,23 +426,25 @@ $(function() {
 	}
 
 	function playVids() {
-		console.log("Playing vids");
-		seekTimeUpdate();
-		$seekSlider.trigger('input');
+		// console.log("Playing vids");
 		playing = true;
 		videoMain.play();
-		videoBsl.play();
+		if($videoBsl.attr('src')) {
+			videoBsl.play();
+		}
 		$playPauseBtn.removeClass("play");
 		$playPauseBtn.addClass("pause");
+		startSeekSlider();
 	}
 
 	function stopVids() {
-		console.log("Stopping vids");
+		// console.log("Stopping vids");
 		playing = false;
 		videoMain.pause();
 		videoBsl.pause();
 		$playPauseBtn.removeClass("pause");
 		$playPauseBtn.addClass("play");
+		stopSeekSlider();
 	}
 
 	function backToMenu() {
@@ -482,44 +483,6 @@ $(function() {
 		$captionDisplay.addClass('hidden');
 	}
 
-	//	Video seeking and tracking
-	function vidSeek() {
-		var seekTo = videoMain.duration * ($seekSlider.get(0).value / 1000);
-		videoMain.currentTime = seekTo;
-		videoBsl.currentTime = seekTo;
-	}
-
-	function seekTimeUpdate() {
-		if(!$attractScreen.is(':visible')) {
-			restartInactivityTimer();
-		}
-		var nt = videoMain.currentTime * (1000 / videoMain.duration);
-		$seekSlider.get(0).value = nt;
-		var pb = nt / 10;
-
-		var curmins = Math.floor(videoMain.currentTime / 60);
-		var cursecs = Math.floor(videoMain.currentTime - curmins * 60);
-		var durmins = Math.floor(videoMain.duration / 60);
-		var dursecs = Math.floor(videoMain.duration - durmins * 60);
-		if(cursecs < 10){ cursecs = "0"+cursecs; }
-		if(dursecs < 10){ dursecs = "0"+dursecs; }
-		if(curmins < 10){ curmins = "0"+curmins; }
-		if(durmins < 10){ durmins = "0"+durmins; }
-		$curTimeText.text(curmins+":"+cursecs);
-		$durTimeText.text(durmins+":"+dursecs);
-		$seekSlider.trigger('input');
-	}
-
-	$seekSlider.on('input', function(e){
-	  var min = e.target.min,
-	      max = e.target.max,
-	      val = e.target.value;
-	  $seekSlider.css({
-	    'backgroundSize': ((val - min) * 100 / (max - min)) + '% 100%'
-	  });
-	});
-
-
   //	Caption control
   $('#subtitleTrack').on('cuechange', function() {
     var myTrack = this.track;             // track element is "this"
@@ -534,12 +497,16 @@ $(function() {
 
   //	Idle timer
   $(document).click(function (e) {
+  	restartIdleTimer();
+  });
+
+  function restartIdleTimer() {
     idleTime = 0;
 		$("#vidControls").removeClass("hiddenControls");
 		$('#menuBtnDiv').removeClass('hiddenMenuBtn');
 		$("#display").removeClass("captionsNoControls");
 		$("#backgroundShadow").removeClass("hiddenShadow");
-  });
+  }
 
 	function timerIncrement() {
     idleTime++;
@@ -552,6 +519,89 @@ $(function() {
 			}
     }
 	}
+
+	function seekTimeUpdate() {
+		if(!$attractScreen.is(':visible')) {
+			restartInactivityTimer();
+		}
+		var nt = videoMain.currentTime * (1000 / videoMain.duration);
+		// $seekSlider.get(0).value = nt;
+
+		console.log(nt);
+
+		var pb = nt / 10;
+
+		var curmins = Math.floor(videoMain.currentTime / 60);
+		var cursecs = Math.floor(videoMain.currentTime - curmins * 60);
+		var durmins = Math.floor(videoMain.duration / 60);
+		var dursecs = Math.floor(videoMain.duration - durmins * 60);
+		if(cursecs < 10){ cursecs = "0"+cursecs; }
+		if(dursecs < 10){ dursecs = "0"+dursecs; }
+		if(curmins < 10){ curmins = "0"+curmins; }
+		if(durmins < 10){ durmins = "0"+durmins; }
+		$curTimeText.text(curmins+":"+cursecs);
+		$durTimeText.text(durmins+":"+dursecs);
+		// $seekSlider.trigger('input');
+	}
+
+	function startSeekSlider() {
+		stopSeekSlider();
+		seekSliderHandler = setInterval(function() {
+			var percentComplete = ((videoMain.currentTime / videoMain.duration) * 100) + '%';
+			$('#seekComplete').width(percentComplete);
+			restartInactivityTimer();
+		}, 100);
+	}
+
+	function stopSeekSlider() {
+		clearInterval(seekSliderHandler);
+	}
+
+	function seekSliderTo(position) {
+		var percent = (position * 100) + '%';
+		$('#seekComplete').width(percent);
+		if(backToMenuHandler) {
+			clearTimeout(backToMenuHandler);
+		}
+	}
+
+	function seekTimeTo(position) {
+		videoMain.currentTime = position * videoMain.duration;
+		videoBsl.currentTime = videoMain.currentTime;
+		seekSliderTo(position);
+		if(playing && (position * videoMain.duration) < videoBsl.duration) {
+			playVids();
+		}
+	}
+
+	$('#seekSlider').on('click', function(e) {
+  	restartIdleTimer();
+  	var positionX = e.offsetX;
+  	console.log(positionX);
+		var clickX = positionX < 0 ? 0 : positionX;
+		var width = $(this).width();
+		var position = clickX / width > 1 ? 1 : clickX / width;
+		seekTimeTo(position);
+	});
+
+	$('#seekSlider').on('touchstart', function(e) {
+  	restartIdleTimer();
+  	var positionX = e.touches[0].clientX - $seekSlider.position().left;
+		var clickX = positionX < 0 ? 0 : positionX;
+		var width = $(this).width();
+		var position = clickX / width > 1 ? 1 : clickX / width;
+		seekTimeTo(position);
+	});
+
+	$('#seekSlider').on('touchmove', function(e) {
+		e.preventDefault();
+  	restartIdleTimer();
+  	var positionX = e.touches[0].clientX - $seekSlider.position().left;
+		var clickX = positionX < 0 ? 0 : positionX;
+		var width = $(this).width();
+		var position = clickX / width > 1 ? 1 : clickX / width;
+		seekTimeTo(position);
+	});
 
 	//	Run on first load
 	firstLoad();

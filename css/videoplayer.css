@@ -16,6 +16,7 @@
 
 #videoBsl{ 
 	position: absolute;
+	height: 600px;
 	right: 0;
 	bottom: 0;
 	z-index: 1;
@@ -68,42 +69,6 @@
 	opacity:0 !important;
 	transform: translateY(180px) !important;
 	transition: all 1.5s ease;
-}
-
-#seekSlider {
-  margin: auto;
-  outline: none;
-  padding: 0;
-	width: 98%;
-  border: none;
-  height: 8px;
-  background-color: rgba(255,255,255,0.5);
-  background-image: linear-gradient(#ffffff, #ffffff);
-  background-size: 50% 100%;
-  background-repeat: no-repeat;
-  border-radius: 10px;
-  cursor: pointer;
-  -webkit-appearance: none;
-	position: absolute;
-	bottom:105px;
-	left:1%;
-}
-
-#seekSlider::-webkit-slider-runnable-track {
-  box-shadow: none;
-  border: none;
-  background: transparent;
-  -webkit-appearance: none;
-}
-
-#seekSlider::-webkit-slider-thumb {
-  width: 20px;
-  height: 20px;
-  border: 0;
-  background: #fff;
-  border-radius: 100%;
-  box-shadow: 0 0 5px 2px rgba(0,0,0,0.1);
-  -webkit-appearance: none;
 }
 #buttonWrapper {
 	height:100px;
@@ -248,7 +213,7 @@ button.active span{
 	left:50%;
 	bottom:200px;
 	z-index: 2;
-	font-size: 28px;
+	font-size: 48px;
 	transform: translateX(-50%);
 	text-shadow: 
 		1px 1px #000,
@@ -285,3 +250,41 @@ video::-webkit-media-text-track-container {
 }
 
 
+#seekSlider {
+	width: 100%;
+	height: 54px;
+	background: rgba(0,0,0,0.3);
+	padding: 11px 8px;
+	margin-top: 42px;
+	box-sizing: border-box;
+}
+
+#seekTrack {
+	width: 100%;
+	height: 8px;
+	background: white;
+	position: relative;
+	margin-top: 12px;
+	left: 0;
+	border-radius: 5px;
+	background: rgba(200,200,200,0.7);
+}
+
+#seekComplete {
+	position: absolute;
+	width: 0%;
+	height: 8px;
+	background: white;
+	border-radius: 5px 0 0 5px;
+}
+#seekComplete:after {
+	content: ' ';
+	position: absolute;
+	top: -8px;
+	right: -12px;
+	height: 24px;
+	width: 24px;
+	border-radius: 30px;
+	background: white;
+	box-shadow: 0 0 2px rgba(0,0,0,0.5);
+}

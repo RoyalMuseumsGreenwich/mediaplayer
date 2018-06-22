@@ -31,7 +31,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="touchToStartBtn"><span class="dot"></span>Touch the screen to start</div>
+			<div class="touchToStartBtn"><span class="dot"></span><span class="btnText">Touch the screen to start</span></div>
 			<div class="textBackdropDiv"></div>
 			<div class="categoryIconDiv attractorAnim">
 				<img src="img/category.svg" class="attractorAnim">
@@ -58,7 +58,7 @@
 			<div id="obscurerBottom" class="obscurer"></div>
 			<div class="menuOverlay"></div>
 			<video autoplay loop class="attractorVid">
-				<source src="media/attractor2.webm" type="video/webm">
+				<source src="" type="video/webm">
 			</video>
 			<div id="thumbnailDiv"></div>
 		</div>
@@ -67,21 +67,32 @@
 		<!-- VIDEO PLAYER SCREEN -->
 		<div id="videoPlayerScreen" class="screen">
 			<div id="videoPlayerDiv">
+
 				<div id="menuBtnDiv">
 					<div id="menuBtnBg"></div>
 					<button id="menuBtn"></button>
 				</div>
+
 				<video id="videoBsl" class="hidden">
 			    <source src="">
 			  </video>
+
 			  <video id="videoMain">
 			    <source src="">
 				  <track id="subtitleTrack" kind="subtitles" srclang="en" src="" label="English" default />
 			  </video>
+
 				<span id="backgroundShadow"></span>
+
 			  <div id="vidControls">
 					<span id="captionDisplay" class="hidden"></span>
-			    <input id="seekSlider" type="range" min="0" max="1000" value="0" step="1">
+
+					<div id="seekSlider">
+						<div id="seekTrack">
+							<div id="seekComplete"></div>
+						</div>
+					</div>
+
 					<div id="buttonWrapper">
 					  <button id="playPauseBtn" class="pause"></button>
 						<button id="restartBtn"></button>
@@ -94,6 +105,7 @@
 						<button id="bslBtn" class="toggleBtn"><span>BSL</span></button>
 						<button id="captionBtn" class="toggleBtn"><span>CC</span></button>
 				  </div>
+
 				</div>
 			</div>
 

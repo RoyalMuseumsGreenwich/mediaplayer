@@ -4,8 +4,9 @@
 	<xmlType>Attractor</xmlType>
 
 	<attractorHeadline>Media Player</attractorHeadline>
-	<attractorBodyText>Some unbelievably fascinating info regarding the media player's exciting content lorem ipsum blah blah blah.</attractorBodyText>
+	<attractorBodyText>Some fascinating info regarding the media player's exciting content lorem ipsum blah blah blah.</attractorBodyText>
 
+<!-- 	<attractorVidPath>media/attractor2_p.mp4</attractorVidPath> -->
 	<attractorVidPath>media/attractor2.webm</attractorVidPath>
 
 </document>

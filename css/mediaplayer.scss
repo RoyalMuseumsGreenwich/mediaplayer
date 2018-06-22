@@ -1,5 +1,10 @@
-$screen_width: 1920px;
-$screen_height: 1080px;
+// Landscape
+$screen-height: 1080px;
+$screen-width: 1920px;
+
+// Portrait
+// $screen-height: 1920px;
+// $screen-width: 1080px;
 
 
 /*	Global	*/
@@ -15,8 +20,8 @@ h1, h2, h3, h4 {
 }
 #container {
 	position: relative;
-	width: $screen_width;
-	height: $screen_height;
+	width: $screen-width;
+	height: $screen-height;
 	overflow: hidden;
 }
 .screen {
@@ -116,13 +121,16 @@ h1, h2, h3, h4 {
 	flex-shrink: 0;
 	flex-grow: 0;
 	margin-right: 80px;
-} .thumbnail.animated {
-	transition: all 1.5s cubic-bezier(0.215, 0.61, 0.355, 1);	/* easeOutCubic */
-} .thumbnail.selected {
-	transform: translateY(-5px);
-} .thumbnail.unSelected {
-	transform: translateY(5px);
-	filter: brightness(50%);
+	&.animated {
+		transition: all 1.5s cubic-bezier(0.215, 0.61, 0.355, 1);	/* easeOutCubic */
+	}
+	&.thumbnail.selected {
+		transform: translateY(-5px);
+	}
+	&.unSelected {
+		transform: translateY(5px);
+		filter: brightness(50%);
+	}
 }
 .thumbImg {
 	z-index: 1;
@@ -202,12 +210,14 @@ h1, h2, h3, h4 {
 	position: relative;
 } .playBtnRing {
 	position: absolute;
-	width: 120px;
-	height: 120px;
+	// width: 120px;
+	// height: 120px;
+	width: 110px;
+	height: 110px;
 	left: 50%;
 	top: 50%;
 	transform: translate(-50%, -50%);
-	border: 7px solid white;
+	border: 5px solid white;
 	border-radius: 100px;
 	background: rgba(0,0,0,0.4);
 } .playBtnTriangle, .playBtnTriangle:before, .playBtnTriangle:after { 
@@ -215,11 +225,12 @@ h1, h2, h3, h4 {
 } .playBtnTriangle {
 	overflow: hidden;
 	position: absolute;
-	top: -82px;
-	left: 42px;
+	top: -85px;
+	left: 43px;
 	margin: 7em auto 0;
-	border-radius: 20%;
-	transform: translateY(50%) rotate(30deg) skewY(30deg) scaleX(.866);
+	border-radius: 15%;
+	filter: blur(0.1px);
+	transform: translateY(50%) rotate(30deg) skewY(30deg) scaleX(.866) scale(0.8);
 } .playBtnTriangle:before, .playBtnTriangle:after {
 	position: absolute;
 	background: white;
@@ -227,12 +238,12 @@ h1, h2, h3, h4 {
 	content: '';
 }
 .playBtnTriangle:before {
-	border-radius: 20% 20% 20% 53%;
+	border-radius: 15% 15% 15% 53%;
 	transform: scaleX(1.155) skewY(-30deg) rotate(-30deg) translateY(-42.3%) 
 			skewX(30deg) scaleY(.866) translateX(-24%);
 }
 .playBtnTriangle:after {
-	border-radius: 20% 20% 53% 20%;
+	border-radius: 15% 15% 53% 15%;
 	transform: scaleX(1.155) skewY(-30deg) rotate(-30deg) translateY(-42.3%) 
 			skewX(-30deg) scaleY(.866) translateX(24%);
 }
@@ -269,11 +280,7 @@ h1, h2, h3, h4 {
 #container.portrait {
 	height: 1920px;
 	width: 1080px;
-} .portrait #attractScreen .textBackdropDiv {
-	width: 100%;
-	height: 50%;
 }
-
 
 #seekSlider {
 	width: 50%;
@@ -281,5 +288,23 @@ h1, h2, h3, h4 {
 
 
 
+.portrait {
+	.thumbnail {
+		width: calc(0.22 * #{$screen-width});
+		height: calc(0.60 * #{$screen-height});
+
+	}
+}
 
 
+
+.landscape {
+	#thumbnailDiv {
+		margin-right: calc(0.13 * #{$screen-width});
+	}
+	.thumbnail {
+		width: calc(0.22 * #{$screen-width});
+		height: calc(0.60 * #{$screen-height});
+		margin-right: calc(0.04 * #{$screen-width});
+	}
+}

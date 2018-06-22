@@ -8,7 +8,7 @@
 		<stillThereTimeMax>10</stillThereTimeMax>
 		<!-- if portraitMode is not 'true', content is displayed landscape -->
 <!-- 		<portraitMode>true</portraitMode> -->
-		<portraitMode>false</portraitMode>
+		<portraitMode>true</portraitMode>
 		<layoutVariant>1</layoutVariant>
 	</settings>
 

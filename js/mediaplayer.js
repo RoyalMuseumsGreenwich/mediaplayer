@@ -520,14 +520,8 @@ $(function() {
     }
 	}
 
-	function seekTimeUpdate() {
-		if(!$attractScreen.is(':visible')) {
-			restartInactivityTimer();
-		}
+	function vidTimeUpdate() {
 		var nt = videoMain.currentTime * (1000 / videoMain.duration);
-		// $seekSlider.get(0).value = nt;
-
-		console.log(nt);
 
 		var pb = nt / 10;
 
@@ -541,7 +535,6 @@ $(function() {
 		if(durmins < 10){ durmins = "0"+durmins; }
 		$curTimeText.text(curmins+":"+cursecs);
 		$durTimeText.text(durmins+":"+dursecs);
-		// $seekSlider.trigger('input');
 	}
 
 	function startSeekSlider() {
@@ -549,6 +542,7 @@ $(function() {
 		seekSliderHandler = setInterval(function() {
 			var percentComplete = ((videoMain.currentTime / videoMain.duration) * 100) + '%';
 			$('#seekComplete').width(percentComplete);
+			vidTimeUpdate();
 			restartInactivityTimer();
 		}, 100);
 	}

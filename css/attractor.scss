@@ -52,7 +52,7 @@ $screen-width: 1920px;
 	animation: categoryIconDiv 24s ease-in-out infinite;
 }
 .categoryIconDiv img {
-	width: 108px;
+	min-width: 180px;
 	opacity: 0;
 	animation: categoryIcon 24s linear infinite;
 }

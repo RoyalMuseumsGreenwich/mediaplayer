@@ -8,8 +8,11 @@
 		<stillThereTimeMax>10</stillThereTimeMax>
 		<!-- if portraitMode is not 'true', content is displayed landscape -->
 <!-- 		<portraitMode>true</portraitMode> -->
-		<portraitMode>true</portraitMode>
+		<portraitMode>false</portraitMode>
 		<layoutVariant>1</layoutVariant>
+		<showBslByDefault>true</showBslByDefault>
+		<showSubsByDefault>true</showSubsByDefault>
+		<autoLoop>true</autoLoop>
 	</settings>
 
 	<defaultFolders>
@@ -29,12 +32,14 @@
 			<video>
 				<file>vid1.mp4</file>local
 			</video>
-<!-- 			<bsl>
+			<bsl>
 				<file>bsl.webm</file>
+				<folder>media2</folder>
 			</bsl>
 			<subtitles>
-				<file>subs1.vtt</file>
-			</subtitles> -->
+				<file>subs2.vtt</file>
+				<folder>media2</folder>
+			</subtitles>
 			<thumbnailImage>
 				<file>HMSVictory.jpg</file>
 			</thumbnailImage>
@@ -48,15 +53,6 @@
 				<file>vid2.mp4</file>
 				<folder>media2</folder>
 			</video>
-			<bsl>
-				<file>bsl.webm</file>
-				<folder>media2</folder>
-			</bsl>
-			<subtitles>
-				<file>subs2.vtt</file>
-				<folder>media2</folder>
-			</subtitles>
-
 			<thumbnailImage>
 				<file>carrier.jpg</file>
 				<folder>media</folder>

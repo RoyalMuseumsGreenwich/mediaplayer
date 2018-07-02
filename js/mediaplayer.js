@@ -27,16 +27,14 @@ $(function() {
 			$curTimeText = $('#curTimeText'),
 			$durTimeText = $('#durTimeText');
 
-	var idleTime = 0,
 			playing = true;
 
 	//	Timers & handlers
-	var stillThereTimeMax, stillThereTime, inactivityTimerMax;
+	var stillThereTime;
 	var stillThereHandler, inactivityHandler, backToMenuHandler;
   var idleInterval = setInterval(timerIncrement, 1000); 					// 1 second
   var seekSliderHandler;
-
-	var portraitMode;
+	var idleTime = 0;
 
 	//	XML
 	var xmlPath_Content = "xml/content.xml";
@@ -44,9 +42,10 @@ $(function() {
 	var xmlPath_Attractor = "xml/attractor.xml";
 	var $xmlDoc_Attractor;
 	var defaultThumbnailFolder, defaultVideoFolder, defaultBslFolder, defaultSubtitleFolder;
+
+
 	var clipArray = [];
-
-
+	var config = {};
 
 	//	Called on first load
 	function firstLoad() {
@@ -102,15 +101,19 @@ $(function() {
 	function processContentXml($xml){
 		console.log("Processing Content XML...");
 
-		inactivityTimerMax = parseInt($xml.find('settings inactivityTimerMax').text()) * 1000;
-		stillThereTimeMax = parseInt($xml.find('settings stillThereTimeMax').text());
-
 		defaultThumbnailFolder = $xml.find('defaultFolders thumbnailImages').text();
 		defaultVideoFolder = $xml.find('defaultFolders video').text();
 		defaultBslFolder = $xml.find('defaultFolders bsl').text();
 		defaultSubtitleFolder = $xml.find('defaultFolders subtitles').text();
 
-		portraitMode = $xml.find('portraitMode').text() === 'true' ? true : false;
+		config.inactivityTimerMax = parseInt($xml.find('settings inactivityTimerMax').text()) * 1000;
+		config.stillThereTimeMax = parseInt($xml.find('settings stillThereTimeMax').text());
+
+		config.showBslByDefault = $xml.find('settings showBslByDefault').text() === 'true' ? true : false;
+		config.showSubsByDefault = $xml.find('settings showSubsByDefault').text() === 'true' ? true : false;
+
+		config.portraitMode = $xml.find('settings portraitMode').text() === 'true' ? true : false;
+		config.autoLoop = $xml.find('settings autoLoop').text() === 'true' ? true : false;
 
 		//	Load XML slide data to slidesArray
 		$xml.find('clip').each(function(){
@@ -141,6 +144,16 @@ $(function() {
 			clipArray.push(thisClipObject);
 		});
 		bufferVid(0);
+		console.log(config);
+		resetVideoPlayer();
+	}
+
+	function autoLoop() {
+		console.log("Autolooping...");
+		stopAttractorVids();
+		$('#attractScreen').hide();
+		$('#stillThereScreen').hide();
+		playClip(0);
 	}
 
 	function generateThumbnails() {
@@ -166,7 +179,6 @@ $(function() {
 					});
 					$(this).removeClass('unSelected');
 					$(this).addClass('selected');
-					console.log('Playing ' + $(this).attr('data-clipArrayIndex'));
 					playClip($(this).attr('data-clipArrayIndex'));
 				});
 			});
@@ -178,7 +190,7 @@ $(function() {
 	}
 
 	function configureDisplay() {
-		if(portraitMode) {
+		if(config.portraitMode) {
 			$container.addClass('portrait');
 		} else {
 			$container.addClass('landscape');
@@ -279,7 +291,7 @@ $(function() {
 	function startInactivityTimer() {
 		inactivityHandler = setTimeout(function() {
 			showStillThereScreen();
-		}, inactivityTimerMax);
+		}, config.inactivityTimerMax);
 	}
 
 	function clearInactivityTimer() {
@@ -336,7 +348,7 @@ $(function() {
 
 	function showStillThereScreen() {
 		console.log("Showing Still There screen");
-		stillThereTime = stillThereTimeMax;
+		stillThereTime = config.stillThereTimeMax;
 		$('#stillThereSpan').text(stillThereTime);
 		$stillThereScreen.fadeIn('fast', function() {
 			startStillThereTimer();
@@ -448,20 +460,24 @@ $(function() {
 	}
 
 	function backToMenu() {
-		clearTimeout(backToMenuHandler);
-		backToMenuHandler = 0;
-		startAttractorVids();
-		if(clipArray.length > 1) {
-			$menuScreen.fadeIn('slow', function() {
-				stopVids();
-			});
+		if(config.autoLoop) {
+			autoLoop();
 		} else {
-			showAttractScreen(function() {
-				stopVids();
-				rewindClip();
-				resetVideoPlayer();
-				clearInactivityTimer();
-			});
+			clearTimeout(backToMenuHandler);
+			backToMenuHandler = 0;
+			startAttractorVids();
+			if(clipArray.length > 1) {
+				$menuScreen.fadeIn('slow', function() {
+					stopVids();
+				});
+			} else {
+				showAttractScreen(function() {
+					stopVids();
+					rewindClip();
+					resetVideoPlayer();
+					clearInactivityTimer();
+				});
+			}
 		}
 	}
 
@@ -476,11 +492,25 @@ $(function() {
 
 	//	Reset BSL & sub display for new user
 	function resetVideoPlayer() {
-		stopVids();
-		$('#bslBtn').removeClass('active');
-		$videoBsl.addClass('hidden');
-		$('#captionBtn').removeClass('active');
-		$captionDisplay.addClass('hidden');
+		if(config.showBslByDefault) {
+			$('#bslBtn').addClass('active');
+			$videoBsl.removeClass('hidden');
+		} else {
+			$('#bslBtn').removeClass('active');
+			$videoBsl.addClass('hidden');
+		}
+		if(config.showSubsByDefault) {
+			$('#captionBtn').addClass('active');
+			$captionDisplay.removeClass('hidden');
+		} else {
+			$('#captionBtn').removeClass('active');
+			$captionDisplay.addClass('hidden');
+		}
+		if(config.autoLoop) {
+			autoLoop();
+		} else {
+			stopVids();
+		}
 	}
 
   //	Caption control

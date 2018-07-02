@@ -213,6 +213,7 @@ button.active span{
 	line-height: 1.5;
 	display: block;
 	left:50%;
+	width: 50%;
 	bottom:200px;
 	z-index: 2;
 	font-size: 48px;
